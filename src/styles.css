@@ -5,3 +5,7 @@
     overflow-x: hidden;
     font-family: 'Rethink Sans', sans-serif;
 }
+
+h1,h3,i{
+    overflow-y: hidden;
+}

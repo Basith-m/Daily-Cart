@@ -1,1 +1,99 @@
-<p>all-products works!</p>
+<div style="margin-top: 80px">
+  <!-- Header-->
+  <header>
+    <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img
+            height="450px"
+            src="https://t4.ftcdn.net/jpg/03/65/85/47/360_F_365854716_ZHB0YN3i3s0H7NjI9hiezH53D5nvoF0E.jpg"
+            class="d-block w-100"
+            alt="banner-1"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            height="450px"
+            src="https://cdn.vectorstock.com/i/preview-1x/57/56/template-banner-for-online-store-with-shopping-vector-42935756.jpg"
+            class="d-block w-100"
+            alt="banner-2"
+          />
+        </div>
+        <div class="carousel-item">
+          <img
+            height="450px"
+            src="https://cdn.vectorstock.com/i/preview-1x/45/89/online-shopping-vector-21284589.jpg"
+            class="d-block w-100"
+            alt="banner-3"
+          />
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExample"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExample"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </header>
+  <!-- Section-->
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+      <div
+        class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+      >
+        <div class="col mb-5">
+          <div class="card h-100 shadow">
+            <!-- Product image-->
+            <img
+              routerLink="view/1"
+              class="card-img-top"
+              src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+              alt="..."
+            />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 style="overflow-y: hidden" class="fw-bolder">
+                  Fancy Product
+                </h5>
+                <!-- Product price-->
+                $40.00 - $80.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="d-flex justify-content-between">
+                <button class="btn">
+                  <i
+                    style="overflow-y: hidden"
+                    class="fa-solid fa-heart text-danger fa-2x"
+                  ></i>
+                </button>
+                <button class="btn">
+                  <i
+                    style="overflow-y: hidden"
+                    class="fa-solid fa-cart-plus text-success fa-2x"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
