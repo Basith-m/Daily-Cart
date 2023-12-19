@@ -54,12 +54,12 @@
       <div
         class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
       >
-        <div 
-        *ngFor="let product of allProducts" class="col mb-5">
-          <div class="card h-100 shadow">
+        <div *ngFor="let product of allProducts" class="col mb-5">
+          <div class="card h-100 shadow p-3">
             <!-- Product image-->
             <img
-              routerLink="view/1"
+              height="200px"
+              routerLink="view/{product.id}"
               class="card-img-top"
               [src]="product.image"
               alt="..."
@@ -69,10 +69,10 @@
               <div class="text-center">
                 <!-- Product name-->
                 <h5 style="overflow-y: hidden" class="fw-bolder">
-                  {{product.title.slice(0,20)}}...
+                  {{ product.title.slice(0, 20) }}...
                 </h5>
                 <!-- Product price-->
-                {{product.price}}
+                {{ product.price }}
               </div>
             </div>
             <!-- Product actions-->
@@ -80,12 +80,14 @@
               <div class="d-flex justify-content-between">
                 <button class="btn">
                   <i
+                    (click)="addToWishlist(product)"
                     style="overflow-y: hidden"
                     class="fa-solid fa-heart text-danger fa-2x"
                   ></i>
                 </button>
                 <button class="btn">
                   <i
+                    onclick="addToCart(product)"
                     style="overflow-y: hidden"
                     class="fa-solid fa-cart-plus text-success fa-2x"
                   ></i>
