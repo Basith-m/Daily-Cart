@@ -24,7 +24,7 @@ export class RegisterComponent {
       const user = {username,email,password}
       this.api.registerAPI(user).subscribe({
         next:(res:any)=>{
-          this.toaster.showSuccess(`${res.username} registerd successfully...`)
+          this.toaster.showSuccess(`${res.username} registered successfully...`)
           this.registerForm.reset()
           this.router.navigateByUrl('/user/login')
         },

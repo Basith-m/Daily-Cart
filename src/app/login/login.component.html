@@ -1,16 +1,52 @@
 <div style="margin-top: 80px">
   <div style="height: 90vh;" class="d-flex align-items-center justify-content-center">
     <div style="width: 500px; height: 500px;" class="d-flex align-items-center justify-content-center rounded bg-light border border-2 shadow">
-      <form class="p-5 d-flex flex-column w-100">
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="p-5 d-flex flex-column w-100">
         <h3 class="fw-bolder mb-5">Login Form</h3>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" name="email"placeholder="name@example.com">
-            <label for="floatingInput">Email Address</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            placeholder="name@example.com"
+            formControlName="email"
+          />
+          <label for="floatingInput">Email Address</label>
+        </div>
+        <!-- validation email -->
+        <div
+          *ngIf="
+            this.loginForm.get('email')?.errors &&
+            this.loginForm.get('email')?.touched
+          "
+          class="mb-3 fw-bolder text-danger"
+        >
+          *Invalid Email
         </div>
 
         <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required pattern="[a-zA-Z0-9]*" minlength="4">
-            <label for="floatingPassword">Password</label>
+          <input
+            type="password"
+            class="form-control mb-2"
+            id="floatingPassword"
+            placeholder="Password"
+            name="password"
+            required
+            pattern="[a-zA-Z0-9]*"
+            minlength="4"
+            formControlName="password"
+          />
+          <label for="floatingPassword">Password</label>
+        </div>
+        <!-- validation password -->
+        <div
+          *ngIf="
+            this.loginForm.get('password')?.errors &&
+            this.loginForm.get('password')?.touched
+          "
+          class="mb-3 fw-bolder text-danger"
+        >
+          *Invalid Password
         </div>
 
         <button type="submit" class="btn btn-primary w-100 mt-3 mb-5">Login</button>
