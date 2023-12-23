@@ -10,6 +10,7 @@ import { ApiService } from '../services/api.service';
 export class HeaderComponent implements OnInit{
 
   wishlistCount:Number = 0
+  cartCount:Number = 0
   constructor(private router:Router, private api:ApiService){}
 
   loginUsername:string = ""
@@ -18,6 +19,9 @@ export class HeaderComponent implements OnInit{
       this.loginUsername = sessionStorage.getItem("username")?.split(" ")[0] || ""
       this.api.wishlistCount.subscribe((res:any)=>{
         this.wishlistCount = res
+      })
+      this.api.cartCount.subscribe((res:any)=>{
+        this.cartCount = res
       })
     }
     else{
@@ -30,6 +34,7 @@ export class HeaderComponent implements OnInit{
     sessionStorage.removeItem("username")
     sessionStorage.getItem("token")
     this.wishlistCount = 0
+    this.cartCount = 0
     this.router.navigateByUrl("/")
   }
 }

@@ -34,14 +34,33 @@ export class ViewProductComponent implements OnInit {
 
   addToWishlist(product:any){
     if(sessionStorage.getItem("token")){
-      this.toaster.showSuccess("Proceed to add item to wishlist")
+      this.api.addToWishlistAPI(product).subscribe({
+        next:(res:any)=>{
+          this.toaster.showSuccess(`${res.title} added to your wishlist`)
+          this.api.getWishlistCount()
+        },
+        error:(err:any)=>{
+          this.toaster.showWarning(err.error)
+        }
+      })
     }else{
-      this.toaster.showWarning("Operation denied...please login!!!")
+      this.toaster.showError("Operation denied...please login!!!")
     }
   }
+
   addToCart(product:any){
     if(sessionStorage.getItem("token")){
-      this.toaster.showSuccess("Proceed to add item to cart")
+      Object.assign(product,{quantity:1})
+      this.api.addToCartAPI(product).subscribe({
+        next:(res:any)=>{
+          this.toaster.showSuccess(res)
+          this.api.getCartCount()
+        },
+        error:(err:any)=>{
+          console.log(err);
+          this.toaster.showError(err.error)
+        }
+      })
     }else{
       this.toaster.showWarning("Operation denied...please login!!!")
     }

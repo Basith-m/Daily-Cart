@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { ToastrService } from 'ngx-toastr';
+import { ToasterService } from '../services/toaster.service';
 
 @Component({
   selector: 'app-all-products',
@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AllProductsComponent implements OnInit {
   allProducts:any = []
-  constructor(private api:ApiService,private toast:ToastrService){
+  constructor(private api:ApiService,private toaster:ToasterService){
   }
   
   ngOnInit(): void {
@@ -22,23 +22,33 @@ export class AllProductsComponent implements OnInit {
     if(sessionStorage.getItem("token")){
       this.api.addToWishlistAPI(product).subscribe({
         next:(res:any)=>{
-          this.toast.success(`${res.title} added to your wishlist`)
+          this.toaster.showSuccess(`${res.title} added to your wishlist`)
           this.api.getWishlistCount()
         },
         error:(err:any)=>{
-          this.toast.warning(err.error)
+          this.toaster.showWarning(err.error)
         }
       })
     }else{
-      this.toast.warning("Operation denied...please login!!!")
+      this.toaster.showWarning("Operation denied...please login!!!")
     }
   }
 
   addToCart(product:any){
     if(sessionStorage.getItem("token")){
-      this.toast.success("Proceed to add item to cart")
+      Object.assign(product,{quantity:1})
+      this.api.addToCartAPI(product).subscribe({
+        next:(res:any)=>{
+          this.toaster.showSuccess(res)
+          this.api.getCartCount()
+        },
+        error:(err:any)=>{
+          console.log(err);
+          this.toaster.showError(err.error)
+        }
+      })
     }else{
-      this.toast.warning("Operation denied...please login!!!")
+      this.toaster.showWarning("Operation denied...please login!!!")
     }
   }
 }
