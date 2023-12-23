@@ -9,8 +9,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AllProductsComponent implements OnInit {
   allProducts:any = []
-  constructor(private api:ApiService,private toaster:ToastrService){}
-
+  constructor(private api:ApiService,private toast:ToastrService){
+  }
+  
   ngOnInit(): void {
     this.api.getAllProductsAPI().subscribe((res:any)=>{
       this.allProducts = res
@@ -19,16 +20,25 @@ export class AllProductsComponent implements OnInit {
 
   addToWishlist(product:any){
     if(sessionStorage.getItem("token")){
-      this.toaster.success("Proceed to add item to wishlist")
+      this.api.addToWishlistAPI(product).subscribe({
+        next:(res:any)=>{
+          this.toast.success(`${res.title} added to your wishlist`)
+          this.api.getWishlistCount()
+        },
+        error:(err:any)=>{
+          this.toast.warning(err.error)
+        }
+      })
     }else{
-      this.toaster.warning("Operation denied...please login!!!")
+      this.toast.warning("Operation denied...please login!!!")
     }
   }
+
   addToCart(product:any){
     if(sessionStorage.getItem("token")){
-      this.toaster.success("Proceed to add item to cart")
+      this.toast.success("Proceed to add item to cart")
     }else{
-      this.toaster.warning("Operation denied...please login!!!")
+      this.toast.warning("Operation denied...please login!!!")
     }
   }
 }

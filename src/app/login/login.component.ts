@@ -25,6 +25,7 @@ export class LoginComponent {
           this.toaster.showSuccess(`${res.existingUser.username} loginned successfully...`)
           sessionStorage.setItem("username",res.existingUser.username)
           sessionStorage.setItem("token",res.token)
+          this.api.getWishlistCount()
           this.loginForm.reset()
           this.router.navigateByUrl('')
         },
