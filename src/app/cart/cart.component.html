@@ -1,11 +1,11 @@
 <app-header></app-header>
 <div style="margin-top: 80px;">
-  <div style="height: 80vh;" class="empty-wislist mt-5 mb-5 d-flex flex-column align-items-center justify-content-center">
+  <div *ngIf="cartItems.length===0" style="height: 80vh;" class="empty-wislist mt-5 mb-5 d-flex flex-column align-items-center justify-content-center">
       <img src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-5521508-4610092.png" alt="">
       <h1 class="text-danger fw-bolder">You Cart is Empty</h1>
       <button routerLink="" class="btn btn-success">Add More Items</button>
   </div>
-  <div class="wishlist">
+  <div *ngIf="cartItems.length>0" class="wishlist">
       <div class="container px-4 px-lg-5 mt-5">
           <h1 class="text-info fw-bolder text-center mb-5">You Cart</h1>
            <div class="row">
@@ -22,18 +22,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Men T-Shirt</td>
-                      <td><img height="100px" width="100px" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fdd%2Fcf%2Fddcfe4e1b1313da86b059e70a1422ec4927aece3.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_tshirtstanks_shortsleeve%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]" alt=""></td>
+                    <tr *ngFor="let product of cartItems; let i=index">
+                      <td>{{i+1}}</td>
+                      <td>{{product.title.slice(0,20)}}</td>
+                      <td><img height="100px" width="100px" [src]="product.image" alt=""></td>
                       <td>
                         <div class="d-flex">
-                          <button class="btn">-</button>
-                          <input type="num" class="form-control text-center" id="inputQuantity" value="1" style="max-width: 3rem;" readonly>
-                          <button class="btn">+</button>
+                          <button class="btn" (click)="decrementCart(product._id)">-</button>
+                          <input type="num" class="form-control text-center" id="inputQuantity" [value]="product.quantity" style="max-width: 3rem;" readonly>
+                          <button class="btn" (click)="incrementCart(product._id)">+</button>
                         </div>
                       </td>
-                      <td>$200</td>
+                      <td>${{product.grandTotal}}</td>
                       <td>
                         <button class="btn"><i class="fa-solid fa-trash text-danger"></i></button>
                       </td>
@@ -43,7 +43,7 @@
               </div>
               <div class="col-lg-4">
                 <div class="border rounded shadow p-3">
-                  <h3>Sub Total: <span class="text-warning">$340</span></h3>
+                  <h3>Sub Total: <span class="text-warning">${{cartTotalPrice}}</span></h3>
                   <hr>
                   <div class="d-grid">
                     <button class="btn btn-primary">Check Out</button>

@@ -68,8 +68,16 @@ export class ApiService {
 
   getCartCount(){
     this.getCartAPI().subscribe((res:any)=>{
-      console.log(res);
+      // console.log(res);
       this.cartCount.next(res.length)
     })
   } 
+
+  cartIncrementAPI(id:any){
+    return this.http.get(`${this.SERVER_URL}/cart/increment/${id}`,this.appendTokenToHeader())
+  }
+
+  cartDecrementAPI(id:any){
+    return this.http.get(`${this.SERVER_URL}/cart/decrement/${id}`,this.appendTokenToHeader())
+  }
 }
