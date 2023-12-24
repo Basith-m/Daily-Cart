@@ -3,10 +3,14 @@
 *{
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden;
     font-family: 'Rethink Sans', sans-serif;
 }
 
 h1,h3,i{
     overflow-y: hidden;
 }
+
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+  }

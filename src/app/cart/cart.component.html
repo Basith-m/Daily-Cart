@@ -35,18 +35,22 @@
                       </td>
                       <td>${{product.grandTotal}}</td>
                       <td>
-                        <button class="btn"><i class="fa-solid fa-trash text-danger"></i></button>
+                        <button class="btn"><i class="fa-solid fa-trash text-danger" (click)="removeItem(product._id)"></i></button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <div class="actions w-100 mb-5 mt-2">
+                  <Button class="float-end  btn btn-danger" (click)="emptyCart()">Empty Cart</Button>
+                  <Button routerLink="" class="float-end  btn btn-info me-3">Add More Items</Button>
+                </div>
               </div>
               <div class="col-lg-4">
                 <div class="border rounded shadow p-3">
                   <h3>Sub Total: <span class="text-warning">${{cartTotalPrice}}</span></h3>
                   <hr>
                   <div class="d-grid">
-                    <button class="btn btn-primary">Check Out</button>
+                    <button class="btn btn-primary" (click)="checkout()">Check Out</button>
                   </div>
                 </div>
               </div>

@@ -80,4 +80,12 @@ export class ApiService {
   cartDecrementAPI(id:any){
     return this.http.get(`${this.SERVER_URL}/cart/decrement/${id}`,this.appendTokenToHeader())
   }
+
+  removeCartItemAPI(id:any){
+    return this.http.delete(`${this.SERVER_URL}/cart/remove/${id}`,this.appendTokenToHeader())
+  }
+
+  emptyCartAPI(){
+    return this.http.delete(`${this.SERVER_URL}/cart/empty-cart`,this.appendTokenToHeader())
+  }
 }

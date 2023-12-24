@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,7 @@ export class CartComponent implements OnInit{
   cartItems:any = []
   cartTotalPrice:Number = 0
 
-  constructor(private api:ApiService){}
+  constructor(private api:ApiService, private router:Router){}
   ngOnInit(): void {
      if(sessionStorage.getItem("token")){
       this.getCart()
@@ -67,5 +68,24 @@ export class CartComponent implements OnInit{
         
       }
     })
+  }
+
+  removeItem(id:any){
+    this.api.removeCartItemAPI(id).subscribe((res:any)=>{
+      this.getCart()
+      this.api.getCartCount()
+    })
+  }
+
+  emptyCart(){
+    this.api.emptyCartAPI().subscribe((res:any)=>{
+      this.getCart()
+      this.api.getCartCount()
+    })
+  }
+
+  checkout(){
+    sessionStorage.setItem("total",JSON.stringify(this.cartTotalPrice))
+    this.router.navigateByUrl('/user/checkout')
   }
 }
