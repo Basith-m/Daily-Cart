@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit{
   logout(){
     this.loginUsername = ""
     sessionStorage.removeItem("username")
-    sessionStorage.getItem("token")
+    sessionStorage.removeItem("token")
     this.wishlistCount = 0
     this.cartCount = 0
     this.router.navigateByUrl("/")

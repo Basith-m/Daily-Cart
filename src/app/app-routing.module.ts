@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -22,13 +23,13 @@ const routes: Routes = [
     path:'user/register', component:RegisterComponent
   },
   {
-    path:'user/wishlist', component:WishlistComponent
+    path:'user/wishlist', canActivate:[authGuard], component:WishlistComponent
   },
   {
-    path:'user/cart', component:CartComponent
+    path:'user/cart', canActivate:[authGuard], component:CartComponent
   },
   {
-    path:'user/checkout', component:CheckoutComponent
+    path:'user/checkout', canActivate:[authGuard], component:CheckoutComponent
   },
   {
     path:'**',redirectTo:''
